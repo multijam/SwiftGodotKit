@@ -7,6 +7,7 @@ let package = Package(
     name: "SwiftGodotKit",
     platforms: [
         .macOS(.v13),
+        .visionOS(.v1),
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
@@ -19,7 +20,7 @@ let package = Package(
         .executable(name: "TrivialSample", targets: ["TrivialSample"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/migueldeicaza/SwiftGodot", revision: "d6a02db8ad4907f8de8a216c40fb083d8525d8e6")
+        .package(path: "../SwiftGodot")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -48,8 +49,9 @@ let package = Package(
         ),
         .binaryTarget (
             name: "libgodot",
-            url: "https://github.com/migueldeicaza/SwiftGodotKit/releases/download/v1.1.0/libgodot.xcframework.zip",
-            checksum: "a90f2082714ac652c8aa6c1546a707c00a362b855071afa73a4443ffd96dcea0"
+            // path: "../SwiftGodot/libgodot.xcframework"
+            url: "https://github.com/multijam/SwiftGodot/releases/download/v0.0.1/libgodot.xcframework.zip",
+            checksum: "3ada2ec668db487dde0c3a7ab4c4a85361f376caadb6b06099b152fcbff59001"
         ),
         .testTarget(
             name: "SwiftGodotKitTests",

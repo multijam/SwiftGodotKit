@@ -23,7 +23,7 @@ func projectSettingsBind (_ x: UnsafeMutableRawPointer?) {
 func embeddedExtensionInit (userData: UnsafeMutableRawPointer?, l: GDExtensionInitializationLevel) {
     print ("SwiftEmbed: Register our types here, level: \(l)")
     if let cb = initHookCb {
-        cb (GDExtension.InitializationLevel(rawValue: Int (l.rawValue))!)
+        cb (GDExtension.InitializationLevel(rawValue: Int64 (l.rawValue))!)
     }
 }
 
@@ -72,7 +72,7 @@ func withUnsafePtr (strings: [String], callback: (UnsafeMutablePointer<UnsafeMut
 ///  - loadScene: called to load your initial scene
 ///  - loadProjectSettings: callback to configure your project settings
 ///  - verbose: whether to show additional logging information.
-public func runGodot (args: [String], initHook: @escaping (GDExtension.InitializationLevel) -> (), loadScene: @escaping (SceneTree)->(), loadProjectSettings: @escaping (ProjectSettings)->(), verbose: Bool = false) {
+public func runGodot (args: [String], initHook: @escaping (GDExtension.InitializationLevel) -> (), loadScene: @escaping (SceneTree)->(), loadProjectSettings: @escaping (ProjectSettings)->(), verbose: Bool = false, headless: Bool = false) {
     guard loadSceneCb == nil else {
         print ("runGodot was already invoked, it can currently only be invoked once")
         return
@@ -106,6 +106,9 @@ public func runGodot (args: [String], initHook: @escaping (GDExtension.Initializ
     copy.insert("SwiftGodotKit", at: 0)
     if verbose {
         copy.insert ("--verbose", at: 1)
+    }
+    if headless {
+        copy.insert("--headless", at: 1)
     }
     withUnsafePtr(strings: copy) { ptr in
         godot_main (Int32 (copy.count), ptr)
