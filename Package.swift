@@ -20,38 +20,54 @@ let package = Package(
         .executable(name: "TrivialSample", targets: ["TrivialSample"]),
     ],
     dependencies: [
-        .package(path: "../SwiftGodot")
+        // .package(url: "https://github.com/migueldeicaza/SwiftGodot", revision: "d6a02db8ad4907f8de8a216c40fb083d8525d8e6")
+        .package(path: "../SwiftGodot"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "SwiftGodotKit",
-            dependencies: ["SwiftGodot", "libgodot"]),
+            dependencies: [
+                "SwiftGodot",
+                .target(name: "binary_libgodot", condition: .when(platforms: [.macOS])),
+                .target(name: "libgodot", condition: .when(platforms: [.linux, .windows])),
+            ]
+        ),
         
-            .executableTarget(
-                name: "UglySample",
-                dependencies: ["SwiftGodotKit"]),
+        .executableTarget(
+            name: "UglySample",
+            dependencies: ["SwiftGodotKit"]
+        ),
         
-            .executableTarget(
-                name: "TrivialSample",
-                dependencies: ["SwiftGodotKit"]),
+        .executableTarget(
+            name: "TrivialSample",
+            dependencies: ["SwiftGodotKit"]
+        ),
 
-            .executableTarget(
-                name: "Properties",
-                dependencies: ["SwiftGodotKit"]),
+        .executableTarget(
+            name: "Properties",
+            dependencies: ["SwiftGodotKit"]
+        ),
         
         // This is a sample that I am porting
         .target(
             name: "Dodge",
-            dependencies: ["SwiftGodotKit", "libgodot"],
+            dependencies: [
+                "SwiftGodotKit",
+                .target(name: "binary_libgodot", condition: .when(platforms: [.macOS])),
+                .target(name: "libgodot", condition: .when(platforms: [.linux, .windows])),
+            ],
             resources: [.copy ("Project")]
         ),
         .binaryTarget (
-            name: "libgodot",
+            name: "binary_libgodot",
             // path: "../SwiftGodot/libgodot.xcframework"
             url: "https://github.com/multijam/SwiftGodot/releases/download/v0.0.2/libgodot.xcframework.zip",
             checksum: "ab466581c40c94b50a8272e2c5ecfb195d1cc094fcfe181f00aee5014e06c24a"
+        ),
+        .systemLibrary(
+            name: "libgodot"
         ),
     ]
 )
