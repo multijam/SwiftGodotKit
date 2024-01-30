@@ -72,7 +72,7 @@ func withUnsafePtr (strings: [String], callback: (UnsafeMutablePointer<UnsafeMut
 ///  - loadScene: called to load your initial scene
 ///  - loadProjectSettings: callback to configure your project settings
 ///  - verbose: whether to show additional logging information.
-public func runGodot (args: [String], initHook: @escaping (GDExtension.InitializationLevel) -> (), loadScene: @escaping (SceneTree)->(), loadProjectSettings: @escaping (ProjectSettings)->(), verbose: Bool = false, headless: Bool = false) {
+public func runGodot (args: [String], initHook: @escaping (GDExtension.InitializationLevel) -> (), loadScene: @escaping (SceneTree)->(), loadProjectSettings: @escaping (ProjectSettings)->(), verbose: Bool = false, headless: Bool = false, runLoopHandledByHost: Bool = false) {
     guard loadSceneCb == nil else {
         print ("runGodot was already invoked, it can currently only be invoked once")
         return
@@ -110,7 +110,15 @@ public func runGodot (args: [String], initHook: @escaping (GDExtension.Initializ
     if headless {
         copy.insert("--headless", at: 1)
     }
+    if runLoopHandledByHost {
+        copy.insert("--runLoopHandledByHost", at: 1)
+    }
     withUnsafePtr(strings: copy) { ptr in
         godot_main (Int32 (copy.count), ptr)
     }
+}
+
+
+public func stepGodotFrame() -> Bool {
+    return godot_runloop_step() != 0
 }
