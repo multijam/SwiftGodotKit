@@ -30,7 +30,7 @@ let package = Package(
             name: "SwiftGodotKit",
             dependencies: [
                 "SwiftGodot",
-                .target(name: "binary_libgodot", condition: .when(platforms: [.macOS])),
+                .target(name: "binary_libgodot", condition: .when(platforms: [.macOS, .visionOS])),
                 .target(name: "libgodot", condition: .when(platforms: [.linux, .windows])),
             ]
         ),
@@ -55,7 +55,7 @@ let package = Package(
             name: "Dodge",
             dependencies: [
                 "SwiftGodotKit",
-                .target(name: "binary_libgodot", condition: .when(platforms: [.macOS])),
+                .target(name: "binary_libgodot", condition: .when(platforms: [.macOS, .visionOS])),
                 .target(name: "libgodot", condition: .when(platforms: [.linux, .windows])),
             ],
             resources: [.copy ("Project")]
