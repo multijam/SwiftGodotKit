@@ -119,6 +119,7 @@ public func runGodot (args: [String], initHook: @escaping (GDExtension.Initializ
 }
 
 
+/// Tick the Godot loop. If you pass --runLoopHandledByHost to Godot, it will assume you will call into this periodically to tick its event loop.
 public func stepGodotFrame() -> Bool {
     return godot_runloop_step() != 0
 }
