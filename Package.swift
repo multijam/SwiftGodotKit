@@ -20,7 +20,7 @@ let package = Package(
         .executable(name: "TrivialSample", targets: ["TrivialSample"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/multijam/SwiftGodot", revision: "75bd743c9a6c263f75604dfb71bff718b8ea28ab")
+        .package(url: "https://github.com/multijam/SwiftGodot", revision: "d5f4229b08fd7369c95b27261f8da57dd4b5651e")
         //.package(path: "../SwiftGodot"),
     ],
     targets: [
@@ -63,8 +63,8 @@ let package = Package(
         .binaryTarget (
             name: "binary_libgodot",
             //path: "../SwiftGodot/libgodot.xcframework"
-            url: "https://github.com/multijam/SwiftGodot/releases/download/v0.0.8/libgodot.xcframework.zip",
-            checksum: "a68856005cb53ee3c4918d54032cfc691d28c6aeea3d73805273ba78edf65574"
+            url: "https://github.com/multijam/SwiftGodot/releases/download/v0.0.9/libgodot.xcframework.zip",
+            checksum: "fdc3cf0a98dce8a9db13bcf0bc051efd6334225222ddf403ac2f9b5fbc5c8fa0"
         ),
         .systemLibrary(
             name: "libgodot"
