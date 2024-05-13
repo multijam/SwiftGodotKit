@@ -20,7 +20,7 @@ let package = Package(
         .executable(name: "TrivialSample", targets: ["TrivialSample"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/multijam/SwiftGodot", revision: "f1f903ddaf011ea5df041706e61511cea2bb890b")
+        .package(url: "https://github.com/multijam/SwiftGodot", revision: "2f709d8141733988ee0b600b06eee897e9ce5ea2")
         //.package(path: "../SwiftGodot"),
     ],
     targets: [
