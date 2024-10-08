@@ -20,8 +20,8 @@ let package = Package(
         .executable(name: "TrivialSample", targets: ["TrivialSample"]),
     ],
     dependencies: [
-        //.package(url: "https://github.com/multijam/SwiftGodot", revision: "028a16cb527206f6ac12b0bfedd757b945975c19")
-        .package(path: "../SwiftGodot"),
+        .package(url: "https://github.com/multijam/SwiftGodot", revision: "a9753686164b63b8228d3b98389d4326d942be80")
+        //.package(path: "../SwiftGodot"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -62,9 +62,9 @@ let package = Package(
         ),
         .binaryTarget (
             name: "binary_libgodot",
-            path: "../SwiftGodot/libgodot.xcframework"
-            //url: "https://github.com/migueldeicaza/SwiftGodotKit/releases/download/4.3.4/libgodot.xcframework.zip",
-            //checksum: "865ea17ad3e20caab05b3beda35061f57143c4acf0e4ad2684ddafdcc6c4f199"
+            //path: "../SwiftGodot/libgodot.xcframework"
+            url: "https://github.com/multijam/SwiftGodot/releases/download/4.3.0/libgodot.xcframework.zip",
+            checksum: "beaf1a665499f4738371338a85c301a94b70fc1da61213a143c95efcdc709413"
         ),
         .systemLibrary(
             name: "libgodot"
