@@ -62,9 +62,9 @@ let package = Package(
         ),
         .binaryTarget (
             name: "binary_libgodot",
-            //path: "../SwiftGodot/libgodot.xcframework"
-            url: "https://github.com/multijam/SwiftGodot/releases/download/4.3.0/libgodot.xcframework.zip",
-            checksum: "beaf1a665499f4738371338a85c301a94b70fc1da61213a143c95efcdc709413"
+            path: "../SwiftGodot/libgodot.xcframework"
+            //url: "https://github.com/multijam/SwiftGodot/releases/download/4.3.0/libgodot.xcframework.zip",
+            //checksum: "beaf1a665499f4738371338a85c301a94b70fc1da61213a143c95efcdc709413"
         ),
         .systemLibrary(
             name: "libgodot"
